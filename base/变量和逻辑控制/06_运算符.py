@@ -1,0 +1,9 @@
+a = 10
+b = 3
+print(f"{a} + {b} = {a + b}")    # 13
+print(f"{a} - {b} = {a - b}")    # 7
+print(f"{a} * {b} = {a * b}")    # 30
+print(f"{a} / {b} = {a / b}")    # 3.3333333333333335
+print(f"{a} // {b} = {a // b}")  # 3
+print(f"{a} % {b} = {a % b}")    # 1
+print(f"{a} ** {b} = {a ** b}")  # 1000
