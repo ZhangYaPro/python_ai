@@ -1,0 +1,26 @@
+{
+  "total": 3,
+  "average_score": 69.66666666666667,
+  "top_student": {
+    "name": "ray",
+    "age": "24",
+    "score": "99"
+  },
+  "students": [
+    {
+      "name": "yabo",
+      "age": "25",
+      "score": "100"
+    },
+    {
+      "name": "ray",
+      "age": "24",
+      "score": "99"
+    },
+    {
+      "name": "jim",
+      "age": "22",
+      "score": "10"
+    }
+  ]
+}
