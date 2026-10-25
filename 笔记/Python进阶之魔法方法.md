@@ -1,4 +1,4 @@
-# Python 魔术方法是什么
+#  Python 魔术方法是什么
 魔术方法就是前后都有双下划线的方法，例如：
 
 ```python
@@ -172,7 +172,7 @@ class Person:
 
 if __name__ == '__main__':
     p = Person('Zack')
-    print(f'p is {p}')
+    print(f'p is {p}')   # 如果不重写这个str  输出的是p这个对象的地址
 
 ```
 
@@ -530,7 +530,7 @@ class Add:
 
 
 add = Add()
-
+#将对象像函数一样使用，可以触发__call__方法
 print(add(3, 5))
 ```
 
@@ -739,7 +739,7 @@ finally:
 
 ```python
 import threading
-
+ 
 class MyLock:
     def __init__(self):
         self.lock = threading.Lock()
@@ -905,3 +905,6 @@ MyDict({'name': 'Tom'})
 | `__next__`     | `next(obj)`               | 返回下一个元素       |
 | `__enter__`    | `with obj`                | 进入上下文           |
 | `__exit__`     | `with 结束`               | 退出上下文，释放资源 |
+
+
+

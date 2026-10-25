@@ -304,12 +304,12 @@ class Student:
     def introduce(self):
         # 将来对象会自动传递给self, 比如s1.introduce, self就是s1
         print(f'您好,我是{self.name}, 我今年{self.age}岁了')
-'''
+''' 
 创建一个学生对象, 会自动调用__init__,
 1. __init__需要三个参数，第一个self实际是指向了对象的地址，这个对象在调用__init__之前
 通过__new__方法就已经创建好，提前在堆空间创建好的， 解释器会自动将这个对象的地址赋值给self
 不需要开发者传参
-2. name, age需要通过Student('zack',18)传递，将实参传递给name,age两个形参
+2. name, age需要通过Student('z ack',18)传递，将实参传递给name,age两个形参
 '''
 # 用s1存储Student生成的对象
 s1 = Student('zack',18)
@@ -529,6 +529,7 @@ print(stu.score)
 class Student:
     def __init__(self, name, score):
         self.name = name
+        #私有属性
         self.__score = score
 
     def get_score(self):
@@ -540,6 +541,9 @@ class Student:
         else:
             print("成绩必须在0到100之间")
 
+     #私有方法  类外的对象不能直接调用这个方法
+    def __introduce(self):
+        print(f'我的名字是:{self.name},我的成绩是:{self.__score}')
 stu = Student("张三", 90)
 print(stu.get_score())
 
@@ -741,7 +745,6 @@ class Animal:
     def __roar(self):
         print('野性的呼唤，原始觉醒')
 
-
 class Bird(Animal):
     # 将共性属性的初始化放入Animal，调用Animal的__init__方法
     # 将Bird特性的属性的初始化放入Bird
@@ -767,8 +770,6 @@ print(Animal.__dict__)
 # 继续去上一级Animal查找，找到_Animal__roar
 bird._Animal__roar()
 ```
-
-
 
 ### <font style="color:rgb(0, 0, 0);">多继承</font>
 <font style="color:rgb(0, 0, 0);">Python 支持多继承：</font>
@@ -931,7 +932,7 @@ dog.introduce()
 
 <font style="color:rgb(0, 0, 0);">说明：</font>
 
-+ `<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">super().__init__(name)</font>`<font style="color:black;"> 调用了父类的构造方法。</font>
++ `super().__init__(name)`<font style="color:black;"> 调用了父类的构造方法。</font>
 + `<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">super().introduce()</font>`<font style="color:black;"> 调用了父类的 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">introduce</font>`<font style="color:black;"> 方法。</font>
 
 <font style="color:rgb(0, 0, 0);">说明：</font>
@@ -973,9 +974,6 @@ class Dog(Animal):
 dog = Dog('旺财','蓝色')
 dog.introduce()
 ```
-
-<font style="color:black;">  
-</font><font style="color:black;"> </font>
 
 ## 多继承风险
 ```python
@@ -1086,18 +1084,13 @@ if __name__ == '__main__':
     hy_car.energy()
 ```
 
-:::info
-如果HybridCar没有实现`__init__`方法, 将会导致通过mro顺序调用上一级的`__init__`方法
-
-而上一级是ElectricCar类，ElectricCar类的`__init__`方法内部又调用了`super()`所以会通过mro找到上一级
-
-这个上一级其实是GasolineCar, 进而造成`__init__`调用参数不匹配而失败
-
-规避的方式第一种即使实现HybridCar的`__init__方法`
-
-第二种方式就是通过父类名.方法名方式显示调用
-
-:::
+>如果HybridCar没有实现`__init__`方法, 将会导致通过mro顺序调用上一级的`__init__`方法``而上一级是ElectricCar类，ElectricCar类的`__init__`方法内部又调用了`super()`所以会通过mro找到上一级
+>
+>这个上一级其实是GasolineCar, 进而造成`__init__`调用参数不匹配而失败
+>
+>规避的方式第一种即使实现HybridCar的`__init__方法`
+>
+>第二种方式就是通过父类名.方法名方式显示调用
 
 **第二种方式**
 
@@ -1267,9 +1260,9 @@ make_sound(Cat())
 make_sound(Duck())
 ```
 
-<font style="color:rgb(0, 0, 0);">这个函数不关心传入的是狗、猫还是鸭子，只关心对象有没有 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">speak</font>`<font style="color:rgb(0, 0, 0);"> 方法。</font>
+<font style="color:rgb(0, 0, 0);">这个函数不关心传入的是狗、猫还是鸭子，只关心对象有没有 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">speak</font>`<font style="color:rgb(0, 0, 0);">  方法。</font>
 
-**<font style="color:rgb(0, 0, 0);">like方式继承</font>**
+**<font style="color:rgb(0, 0, 0);">like方式继承</font>** 
 
 <font style="color:rgb(0, 0, 0);">like方式就是像的意思，不要求类一定和某一个类实现继承关系，只要这个类具备相似的方法即可。</font>
 
@@ -1309,17 +1302,17 @@ if __name__ == '__main__':
 王者荣耀换肤案例
 '''
 from pyarrow._flight import BasicAuth
-
-
 # 皮肤基类
 class BaseSkin:
     def show(self):
         pass
 
+    #原皮肤
 class XHOriginSkin(BaseSkin):
     def show(self):
         print('没错，我就是呼唤胜利的男神')
 
+    #新皮肤
 class WXJFSkin(BaseSkin):
     def show(self):
         print('我就差一点了,快来砍我')
@@ -1369,8 +1362,8 @@ if __name__ == '__main__':
 ## **<font style="color:rgb(255, 255, 255);background-color:rgb(239, 112, 96);">特殊方法</font>**
 <font style="color:rgb(0, 0, 0);">Python 中有一些以双下划线开头和结尾的方法，称为特殊方法，也叫魔术方法。</font>
 
-### `<font style="color:rgb(239, 112, 96);">__str__</font>`
-<font style="color:rgb(0, 0, 0);">当使用 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">print()</font>`<font style="color:rgb(0, 0, 0);"> 打印对象时，会自动调用对象的 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">__str__</font>`<font style="color:rgb(0, 0, 0);"> 方法。</font>
+### `>__str__`
+<font style="color:rgb(0, 0, 0);">当使用 </font>`print()`<font style="color:rgb(0, 0, 0);"> 打印对象时，会自动调用对象的 </font>`>__str__`<font style="color:rgb(0, 0, 0);"> 方法。</font>
 
 ```python
 class Student:
@@ -1391,7 +1384,7 @@ print(stu)
 
 <font style="color:rgb(0, 0, 0);">如果不定义 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">__str__</font>`<font style="color:rgb(0, 0, 0);">，直接打印对象通常会看到对象的内存地址信息，不利于阅读。</font>
 
-### `<font style="color:rgb(239, 112, 96);">__repr__</font>`
+### `__repr__`
 `<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">__repr__</font>`<font style="color:rgb(0, 0, 0);"> 更偏向开发者调试使用，通常返回一个更明确的对象描述。</font>
 
 ```python
@@ -1415,7 +1408,7 @@ Student(name='张三', age=18)
 
 ## **<font style="color:rgb(255, 255, 255);background-color:rgb(239, 112, 96);">类方法和静态方法</font>**
 ### <font style="color:rgb(0, 0, 0);">实例方法</font>
-<font style="color:rgb(0, 0, 0);">最常见的方法是实例方法，第一个参数是 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">self</font>`<font style="color:rgb(0, 0, 0);">。</font>
+<font style="color:rgb(0, 0, 0);">最常见的方法是实例方法，第一个参数是 </font>`self`<font style="color:rgb(0, 0, 0);">。</font>
 
 ```python
 class Student:
@@ -1426,7 +1419,7 @@ class Student:
 <font style="color:rgb(0, 0, 0);">实例方法通常需要访问对象本身的数据。</font>
 
 ### <font style="color:rgb(0, 0, 0);">类方法</font>
-<font style="color:rgb(0, 0, 0);">类方法使用 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">@classmethod</font>`<font style="color:rgb(0, 0, 0);"> 装饰器，第一个参数通常是 </font>`<font style="color:rgb(239, 112, 96);background-color:rgba(27, 31, 35, 0.05);">cls</font>`<font style="color:rgb(0, 0, 0);">，表示当前类。</font>
+<font style="color:rgb(0, 0, 0);">类方法使用 </font>`@classmethod`<font style="color:rgb(0, 0, 0);"> 装饰器，第一个参数通常是 </font>`cls`，表示**当前类。**
 
 ```python
 class Student:
@@ -1436,12 +1429,16 @@ class Student:
         self.name = name
         Student.count += 1
 
-    @classmethod
+    @classmethod·
     def show_count(cls):
         print(f"当前学生人数：{cls.count}")
 
-Student("张三")
-Student("李四")
+#类方法被所有对象共享,可以通过类名或者对象进行访问
+
+s1 = Student("张三")
+s2 = Student("李四")
+s1.show_count()
+s2.show_count()
 Student.show_count()
 ```
 
@@ -1470,8 +1467,8 @@ print(MathTool.add(3, 5))
 ### <font style="color:rgb(0, 0, 0);">三种方法对比</font>
 | **<font style="color:rgb(0, 0, 0);">方法类型</font>** | **<font style="color:rgb(0, 0, 0);">第一个参数</font>** | **<font style="color:rgb(0, 0, 0);">是否访问实例属性</font>** | **<font style="color:rgb(0, 0, 0);">是否访问类属性</font>** |
 | :---------------------------------------------------- | :------------------------------------------------------ | :----------------------------------------------------------- | :---------------------------------------------------------- |
-| <font style="color:rgb(0, 0, 0);">实例方法</font>     | `<font style="color:rgb(239, 112, 96);">self</font>`    | <font style="color:rgb(0, 0, 0);">可以</font>                | <font style="color:rgb(0, 0, 0);">可以</font>               |
-| <font style="color:rgb(0, 0, 0);">类方法</font>       | `<font style="color:rgb(239, 112, 96);">cls</font>`     | <font style="color:rgb(0, 0, 0);">不直接访问</font>          | <font style="color:rgb(0, 0, 0);">可以</font>               |
+| <font style="color:rgb(0, 0, 0);">实例方法</font>     | `self`                                                  | <font style="color:rgb(0, 0, 0);">可以</font>                | <font style="color:rgb(0, 0, 0);">可以</font>               |
+| <font style="color:rgb(0, 0, 0);">类方法</font>       | `cls`                                                   | <font style="color:rgb(0, 0, 0);">不直接访问</font>          | <font style="color:rgb(0, 0, 0);">可以</font>               |
 | <font style="color:rgb(0, 0, 0);">静态方法</font>     | <font style="color:rgb(0, 0, 0);">无固定参数</font>     | <font style="color:rgb(0, 0, 0);">不访问</font>              | <font style="color:rgb(0, 0, 0);">不访问</font>             |
 
 
@@ -1598,7 +1595,7 @@ import json
 import os
 
 class Book:
-    def __init__(self,title,author,price,isbn,count):
+    def __init__(self,title,    6  author,price,isbn,count):
         self.title = title
         self.author = author
         self.price = price
