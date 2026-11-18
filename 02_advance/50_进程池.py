@@ -25,5 +25,6 @@ if __name__ == '__main__':
         函数相当于投喂的动作
         '''
         data_list = [1, 2, 3, 4, 5, 6, 7, 8]
+        #这个pool.map()返回的是列表   直接是结果  和ThreadPoolExecutor.map 不一致，这个返回的是生成器对象，如果想要显示出列表，必须使用list()
         result = pool.map(calc_power, data_list)
-    print(f'所有进程执行结果:{result}')
+    print(f'所有进程执行结果:{list(result)}')

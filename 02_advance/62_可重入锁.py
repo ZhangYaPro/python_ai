@@ -1,7 +1,4 @@
 import threading
-
-from distributed import lock
-
 lock = threading.Lock()
 num = 0
 
